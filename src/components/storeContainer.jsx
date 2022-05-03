@@ -9,18 +9,18 @@ const filterFlight = (MOCK_FLIGHT, beginCostInput, endCostInput) => {
     return MOCK_FLIGHT.result.flights.map((f, index) => {
         return Number(f.flight.price.total.amount)
     }).filter((el) => {
-        return el > beginCostInput && el < endCostInput
+        return el >= beginCostInput && el <= endCostInput
     })
 }
 
 const StoreContainer = () => {
 
     const [flightList, setFlightList] = useState(MOCK_FLIGHT)
-    const [beginCostInput, setBeginCostInput] = useState(1)
-    const [endCostInput, setEndCostInput] = useState(25000)
+    const [beginCostInput, setBeginCostInput] = useState(0)
+    const [endCostInput, setEndCostInput] = useState(21500)
 
     useEffect(() => {
-        setTimeout(() => {
+        const timeOut = setTimeout(() => {
             const filt = filterFlight(MOCK_FLIGHT, beginCostInput, endCostInput)
             setFlightList(
                 {
@@ -32,6 +32,8 @@ const StoreContainer = () => {
                 }
             )
         }, 500);
+
+        return () => clearTimeout(timeOut)
 
     }, [beginCostInput, endCostInput])
 
