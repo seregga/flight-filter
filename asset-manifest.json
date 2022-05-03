@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/flight-filter/static/css/main.e5154f1f.css",
+    "main.js": "/flight-filter/static/js/main.86ed5aa9.js",
+    "static/js/787.5f088bb5.chunk.js": "/flight-filter/static/js/787.5f088bb5.chunk.js",
+    "index.html": "/flight-filter/index.html",
+    "main.e5154f1f.css.map": "/flight-filter/static/css/main.e5154f1f.css.map",
+    "main.86ed5aa9.js.map": "/flight-filter/static/js/main.86ed5aa9.js.map",
+    "787.5f088bb5.chunk.js.map": "/flight-filter/static/js/787.5f088bb5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e5154f1f.css",
+    "static/js/main.86ed5aa9.js"
+  ]
+}
