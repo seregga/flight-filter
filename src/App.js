@@ -1,25 +1,20 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Filters from './components/SideBar/Filters';
+import MainContainer from './components/Main/MainContainer';
+import Store from './redux/store';
+import StoreContainer from './components/storeContainer';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div >
+            <StoreContainer />
+            {/* <Filters store={Store} />
+            <MainContainer store={Store} /> */}
+        </div>
+
+    )
 }
+
 
 export default App;
