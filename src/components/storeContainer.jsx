@@ -13,21 +13,21 @@ const filterFlight = (MOCK_FLIGHT, beginCostInput, endCostInput) => {
     })
 }
 
-const StoreContainer = () => {
+const StoreContainer = (props) => {
 
     const [flightList, setFlightList] = useState(MOCK_FLIGHT)
-    const [beginCostInput, setBeginCostInput] = useState(0)
-    const [endCostInput, setEndCostInput] = useState(21500)
+    const [beginCostInput, setBeginCostInput] = useState('')
+    const [endCostInput, setEndCostInput] = useState(100000)
 
     useEffect(() => {
         const timeOut = setTimeout(() => {
-            const filt = filterFlight(MOCK_FLIGHT, beginCostInput, endCostInput)
+            const filterFlightByPrice = filterFlight(MOCK_FLIGHT, beginCostInput, endCostInput)
             setFlightList(
                 {
                     ...MOCK_FLIGHT,
                     result: {
                         ...MOCK_FLIGHT.result,
-                        flights: MOCK_FLIGHT.result.flights.filter(el => filt.includes(Number(el.flight.price.total.amount)))
+                        flights: MOCK_FLIGHT.result.flights.filter(el => filterFlightByPrice.includes(Number(el.flight.price.total.amount)))
                     }
                 }
             )

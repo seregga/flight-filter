@@ -2,12 +2,15 @@ import React from 'react';
 import s from './Main.module.css';
 
 
+
+
 const Main = ({ flightList }) => {
     return (
         <div className={s.main__wrap}>
             {flightList.result.flights.map((f, idx) => {
                 const flightThere = f.flight.legs[0]
                 const flightBack = f.flight.legs[1]
+
                 const idxSegmentFlightThere = flightThere.segments.length === 1
                     ? 0
                     : flightThere.segments.length - 1
@@ -39,7 +42,9 @@ const Main = ({ flightList }) => {
                                     <span>({flightThere.segments[0].departureAirport.uid}) </span>
                                     <span>---</span>
                                     {/* // город и аэропорт прибытия */}
-                                    <span>{flightThere.segments[idxSegmentFlightThere].arrivalCity.caption}, </span>
+                                    <span>{flightThere.segments[idxSegmentFlightThere].arrivalCity
+                                        ? flightThere.segments[idxSegmentFlightThere].arrivalCity.caption
+                                        : 'город прибытия отсутствует'}, </span>
                                     <span>{flightThere.segments[idxSegmentFlightThere].arrivalAirport.caption} </span>
                                     <span>({flightThere.segments[idxSegmentFlightThere].arrivalAirport.uid}) </span>
                                 </div>
@@ -88,12 +93,16 @@ const Main = ({ flightList }) => {
                             <div className={s.information}>
                                 <div className={s.information__city}>
                                     {/* // город и аэропорт отправления */}
-                                    <span>{flightBack.segments[0].departureCity.caption}, </span>
+                                    <span>{flightBack.segments[0].departureCity
+                                        ? flightBack.segments[0].departureCity.caption
+                                        : 'город отправления отсутствует'}, </span>
                                     <span>{flightBack.segments[0].departureAirport.caption} </span>
                                     <span>({flightBack.segments[0].departureAirport.uid}) </span>
                                     <span>---</span>
                                     {/* // город и аэропорт прибытия */}
-                                    <span>{flightBack.segments[idxSegmentFlightBack].arrivalCity.caption}, </span>
+                                    <span>{flightBack.segments[idxSegmentFlightBack].arrivalCity
+                                        ? flightBack.segments[idxSegmentFlightBack].arrivalCity.caption
+                                        : 'город прибытия отсутствует'}, </span>
                                     <span>{flightBack.segments[idxSegmentFlightBack].arrivalAirport.caption} </span>
                                     <span>({flightBack.segments[idxSegmentFlightBack].arrivalAirport.uid}) </span>
                                 </div>
@@ -133,6 +142,7 @@ const Main = ({ flightList }) => {
                                 </div>
                             </div>
                         </div>
+
 
                         <div className={s.card__footer}>ВЫБРАТЬ</div>
                     </div>
