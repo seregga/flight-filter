@@ -27,3 +27,7 @@
 input {
     outline: none;
 }
+
+.loader-wrap {
+    padding: 45%;
+}

@@ -5,10 +5,10 @@ import Cost from './Cost';
 import Filter from './Filter';
 import Sort from './Sort';
 
-const Filters = ({ beginCostInput, setBeginCostInput, endCostInput, setEndCostInput }) => {
+const Filters = ({ beginCostInput, setBeginCostInput, endCostInput, setEndCostInput, setSortValue, sortValue }) => {
     return (
         <div className='filter-wrap'>
-            <Sort />
+            <Sort setSortValue={setSortValue} sortValue={sortValue} />
             <Filter />
             <Cost beginCostInput={beginCostInput}
                 setBeginCostInput={setBeginCostInput}

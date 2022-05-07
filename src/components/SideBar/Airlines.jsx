@@ -12,7 +12,7 @@ const Airlines = (props) => {
                     <input name={'no-transfer'} type={'checkbox'} />-LOT Polish Airlines
                 </div>
             </form>
-        </div>
+        </div >
     )
 }
 export default Airlines
