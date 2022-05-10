@@ -1,6 +1,5 @@
 .main__wrap {
     grid-area: m;
-    background-color: #fff;
     padding: 10px;
 
 }
@@ -91,4 +90,8 @@
     background-color: #e9771b;
     color: #fff;
     text-transform: uppercase;
+}
+
+.query__nofound {
+    text-align: center;
 }

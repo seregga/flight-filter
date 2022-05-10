@@ -9,9 +9,9 @@ const Main = ({ flightList }) => {
     return (
         <div className={s.main__wrap}>
             {flightList.result.flights.map((f, idx) => {
-                const flightThere = f.flight.legs[0]
-                const flightBack = f.flight.legs[1]
-                const flightCarrier = f.flight.carrier.caption
+                const flightThere = f.flight.legs[0] // перелет туда
+                const flightBack = f.flight.legs[1] // перелет обратно
+                const flightCarrier = f.flight.carrier.caption // перевозчик
 
                 const idxSegmentFlightThere = flightThere.segments.length === 1
                     ? 0

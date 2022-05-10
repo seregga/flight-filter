@@ -5,11 +5,20 @@ import Cost from './Cost';
 import Filter from './Filter';
 import Sort from './Sort';
 
-const Filters = ({ beginCostInput, setBeginCostInput, endCostInput, setEndCostInput, setSortValue, sortValue }) => {
+const Filters = ({ beginCostInput, setBeginCostInput, endCostInput, setEndCostInput,
+    setSortValueInput, sortValueInput, transferValueInput, setTransferValueInput,
+    flightList, setFlightList, setIsLoading }) => {
+
     return (
         <div className='filter-wrap'>
-            <Sort setSortValue={setSortValue} sortValue={sortValue} />
-            <Filter />
+            <Sort
+                setSortValueInput={setSortValueInput}
+                sortValueInput={sortValueInput}
+                flightList={flightList}
+                setFlightList={setFlightList}
+                setIsLoading={setIsLoading}
+            />
+            <Filter transferValueInput={transferValueInput} setTransferValueInput={setTransferValueInput} />
             <Cost beginCostInput={beginCostInput}
                 setBeginCostInput={setBeginCostInput}
                 endCostInput={endCostInput}

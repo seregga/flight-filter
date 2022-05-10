@@ -4,62 +4,78 @@ import MOCK_FLIGHT from '../data/MOCK_FLIGHT.json';
 import Filters from './SideBar/Filters';
 import MainContainer from './Main/MainContainer';
 import Loader from './UI/Loader/Loader';
+import { filterByFlightCost } from './../common/common';
 
 
-const StoreContainer = (props) => {
+const StoreContainer = () => {
 
     const [flightList, setFlightList] = useState(MOCK_FLIGHT)
     const [beginCostInput, setBeginCostInput] = useState('')
-    const [endCostInput, setEndCostInput] = useState(23000)
+    const [endCostInput, setEndCostInput] = useState(230000)
     const [isLoading, setIsLoading] = useState(false)
-    const [sortValue, setSortValue] = useState('1')
-
-
-    const filterFlight = (MOCK_FLIGHT, beginCostInput, endCostInput) => {
-        return MOCK_FLIGHT.result.flights.map((f) => {
-            return Number(f.flight.price.total.amount)
-        }).filter((el) => {
-            return el >= beginCostInput && el <= endCostInput
-        })
-    }
+    const [sortValueInput, setSortValueInput] = useState('1')
+    const [transferValueInput, setTransferValueInput] = useState('2')
 
     useEffect(() => {
-        console.log('useEffect');
-        setIsLoading(true)
-        const timeOut = setTimeout(() => {
-            const filterFlightByPrice = filterFlight(MOCK_FLIGHT, beginCostInput, endCostInput)
-            setFlightList(
-                {
-                    ...MOCK_FLIGHT,
-                    result: {
-                        ...MOCK_FLIGHT.result,
-                        flights: MOCK_FLIGHT.result.flights.filter(el => filterFlightByPrice
-                            .includes(Number(el.flight.price.total.amount)))
 
+        setIsLoading(true)
+
+        const timeOut = setTimeout(() => {
+
+            transferValueInput === '1'
+                ? setFlightList(
+                    {
+                        ...MOCK_FLIGHT,
+                        result: {
+                            ...MOCK_FLIGHT.result,
+                            flights: MOCK_FLIGHT.result.flights
+                                .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
+                                    .includes(Number(el.flight.price.total.amount)))
+                                .filter(el => el.flight.legs[0].segments.length === 2 && el.flight.legs[1].segments.length === 2)
+                        }
                     }
-                }
-            )
+                )
+                : setFlightList(
+                    {
+                        ...MOCK_FLIGHT,
+                        result: {
+                            ...MOCK_FLIGHT.result,
+                            flights: MOCK_FLIGHT.result.flights
+                                .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
+                                    .includes(Number(el.flight.price.total.amount)))
+                                .filter(el => el.flight.legs[0].segments.length === 1 && el.flight.legs[1].segments.length === 1)
+                        }
+                    }
+                )
+
             setIsLoading(false)
+
         }, 500);
+
         return () => clearTimeout(timeOut)
 
-    }, [beginCostInput, endCostInput])
-
+    }, [beginCostInput, endCostInput, transferValueInput])
 
     return (
         <div className='app-wrap'>
-            {isLoading
-                ? <div className='loader-wrap'><Loader /></div>
-                : <MainContainer flightList={flightList} />
-            }
-
             <Filters
-                setSortValue={setSortValue}
-                sortValue={sortValue}
+                transferValueInput={transferValueInput}
+                setTransferValueInput={setTransferValueInput}
+                setSortValueInput={setSortValueInput}
+                sortValueInput={sortValueInput}
                 beginCostInput={beginCostInput}
                 setBeginCostInput={setBeginCostInput}
                 endCostInput={endCostInput}
-                setEndCostInput={setEndCostInput} />
+                setEndCostInput={setEndCostInput}
+                flightList={flightList}
+                setFlightList={setFlightList}
+                setIsLoading={setIsLoading}
+            />
+            {isLoading
+                ? <div className='loader-wrap'><Loader /></div>
+                : <MainContainer flightList={flightList}
+                    sortValueInput={sortValueInput} />
+            }
         </div>
     )
 }
