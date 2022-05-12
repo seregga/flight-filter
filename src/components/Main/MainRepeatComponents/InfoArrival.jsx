@@ -1,4 +1,5 @@
 import React from "react"
+import s from './../Main.module.css';
 
 const InfoArrival = ({ infoArrival, infoIdxSegmentFlight }) => {
     return (<>
@@ -6,7 +7,7 @@ const InfoArrival = ({ infoArrival, infoIdxSegmentFlight }) => {
             ? infoArrival.segments[infoIdxSegmentFlight].arrivalCity.caption
             : 'не найден'}, </span>
         <span>{infoArrival.segments[infoIdxSegmentFlight].arrivalAirport.caption} </span>
-        <span>({infoArrival.segments[infoIdxSegmentFlight].arrivalAirport.uid}) </span>
+        <span className={s.information__city_blue}>({infoArrival.segments[infoIdxSegmentFlight].arrivalAirport.uid}) </span>
     </>)
 }
 export default InfoArrival

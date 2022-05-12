@@ -6,10 +6,10 @@ const Airlines = (props) => {
             <form >
                 <h5>Авиакомпании</h5>
                 <div>
-                    <input name={'transfer'} type={'checkbox'} />-Аэрофлот
+                    <input name={'transfer'} type={'checkbox'} disabled />-Аэрофлот
                 </div>
                 <div>
-                    <input name={'no-transfer'} type={'checkbox'} />-LOT Polish Airlines
+                    <input name={'no-transfer'} type={'checkbox'} disabled />-LOT Polish Airlines
                 </div>
             </form>
         </div >
