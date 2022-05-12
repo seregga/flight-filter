@@ -6,7 +6,6 @@ import MainContainer from './Main/MainContainer';
 import Loader from './UI/Loader/Loader';
 import { filterByFlightCost } from './../common/common';
 
-
 const StoreContainer = () => {
 
     const [flightList, setFlightList] = useState(MOCK_FLIGHT)
@@ -16,37 +15,35 @@ const StoreContainer = () => {
     const [sortValueInput, setSortValueInput] = useState('1')
     const [transferValueInput, setTransferValueInput] = useState('2')
 
+    const filteredByCostAndTransfer = () => {
+        if (transferValueInput === '1') {
+            return MOCK_FLIGHT.result.flights
+                .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
+                    .includes(Number(el.flight.price.total.amount)))
+                .filter(el => el.flight.legs[0].segments.length === 2 && el.flight.legs[1].segments.length === 2)
+        } else {
+            return MOCK_FLIGHT.result.flights
+                .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
+                    .includes(Number(el.flight.price.total.amount)))
+                .filter(el => el.flight.legs[0].segments.length === 1 && el.flight.legs[1].segments.length === 1)
+        }
+    }
+
     useEffect(() => {
 
         setIsLoading(true)
 
         const timeOut = setTimeout(() => {
 
-            transferValueInput === '1'
-                ? setFlightList(
-                    {
-                        ...MOCK_FLIGHT,
-                        result: {
-                            ...MOCK_FLIGHT.result,
-                            flights: MOCK_FLIGHT.result.flights
-                                .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
-                                    .includes(Number(el.flight.price.total.amount)))
-                                .filter(el => el.flight.legs[0].segments.length === 2 && el.flight.legs[1].segments.length === 2)
-                        }
+            setFlightList(
+                {
+                    ...MOCK_FLIGHT,
+                    result: {
+                        ...MOCK_FLIGHT.result,
+                        flights: filteredByCostAndTransfer()
                     }
-                )
-                : setFlightList(
-                    {
-                        ...MOCK_FLIGHT,
-                        result: {
-                            ...MOCK_FLIGHT.result,
-                            flights: MOCK_FLIGHT.result.flights
-                                .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
-                                    .includes(Number(el.flight.price.total.amount)))
-                                .filter(el => el.flight.legs[0].segments.length === 1 && el.flight.legs[1].segments.length === 1)
-                        }
-                    }
-                )
+                }
+            )
 
             setIsLoading(false)
 

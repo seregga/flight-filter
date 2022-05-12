@@ -2,49 +2,36 @@ import React, { useEffect } from 'react';
 
 const Sort = ({ sortValueInput, setSortValueInput, flightList, setFlightList, setIsLoading }) => {
 
+    const sortedByTypeFlightList = () => {
+        if (sortValueInput === '1') {
+            return flightList.result.flights
+                .sort((a, b) => a.flight.price.total.amount - b.flight.price.total.amount)
+        }
+        if (sortValueInput === '2') {
+            return flightList.result.flights
+                .sort((a, b) => b.flight.price.total.amount - a.flight.price.total.amount)
+        }
+        if (sortValueInput === '3') {
+            return flightList.result.flights
+                .sort((a, b) => a.flight.legs[0].duration - b.flight.legs[0].duration)
+        }
+
+    }
+
     useEffect(() => {
 
         setIsLoading(true)
 
         const timeOut = setTimeout(() => {
-            if (sortValueInput === '1') {
-                setFlightList(
-                    {
-                        ...flightList,
-                        result: {
-                            ...flightList.result,
-                            flights: [...flightList.result.flights
-                                .sort((a, b) => a.flight.price.total.amount - b.flight.price.total.amount)]
-
-                        }
+            setFlightList(
+                {
+                    ...flightList,
+                    result: {
+                        ...flightList.result,
+                        flights: [...sortedByTypeFlightList()]
                     }
-                )
-            }
-            if (sortValueInput === '2') {
-                setFlightList(
-                    {
-                        ...flightList,
-                        result: {
-                            ...flightList.result,
-                            flights: [...flightList.result.flights
-                                .sort((a, b) => b.flight.price.total.amount - a.flight.price.total.amount)]
-                        }
-                    }
-                )
-            }
-            if (sortValueInput === '3') {
-                setFlightList(
-                    {
-                        ...flightList,
-                        result: {
-                            ...flightList.result,
-                            flights: [...flightList.result.flights
-                                .sort((a, b) => a.flight.legs[0].duration - b.flight.legs[0].duration)]
-
-                        }
-                    }
-                )
-            }
+                }
+            )
 
             setIsLoading(false)
 

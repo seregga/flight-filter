@@ -1,6 +1,4 @@
-import React from "react";
-
-// массив цен попадающих в параметры от и до
+// массив цен попадающих в параметры цен от и до
 export const filterByFlightCost = (MOCK_FLIGHT, beginCostInput, endCostInput) => {
 
     return MOCK_FLIGHT.result.flights.map((f) => {
