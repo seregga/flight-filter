@@ -16,16 +16,16 @@ const StoreContainer = () => {
     const [transferValueInput, setTransferValueInput] = useState('2')
 
     const filteredByCostAndTransfer = () => {
+        const filteredByFlightCost = MOCK_FLIGHT.result.flights
+            .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
+                .includes(Number(el.flight.price.total.amount)))
+
         if (transferValueInput === '1') {
-            return MOCK_FLIGHT.result.flights
-                .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
-                    .includes(Number(el.flight.price.total.amount)))
-                .filter(el => el.flight.legs[0].segments.length === 2 && el.flight.legs[1].segments.length === 2)
+            return filteredByFlightCost.filter(el => el.flight.legs[0].segments.length === 2
+                && el.flight.legs[1].segments.length === 2)
         } else {
-            return MOCK_FLIGHT.result.flights
-                .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
-                    .includes(Number(el.flight.price.total.amount)))
-                .filter(el => el.flight.legs[0].segments.length === 1 && el.flight.legs[1].segments.length === 1)
+            return filteredByFlightCost.filter(el => el.flight.legs[0].segments.length === 1
+                && el.flight.legs[1].segments.length === 1)
         }
     }
 
