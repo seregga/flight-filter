@@ -5,7 +5,9 @@ import MainHeader from './MainHeader/MainHeader';
 import MainFlightBack from './MainFlightBack';
 
 
-const Main = ({ flightList }) => {
+const Main = ({ flightList, addMore }) => {
+
+
     return (
         <div className={s.main__wrap}>
             {flightList.result.flights.map((f, idx) => {
@@ -21,7 +23,7 @@ const Main = ({ flightList }) => {
                     ? 0
                     : flightBack.segments.length - 1
 
-                return <div key={idx}>{
+                return <div key={f.flightToken}>{
 
                     <div className={s.card}>
 
@@ -47,6 +49,7 @@ const Main = ({ flightList }) => {
                     </div>
                 }</div>
             })}
+            <button className={s.main__button} onClick={addMore}>Показать еще</button>
         </div>
     )
 }

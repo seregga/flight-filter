@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import StoreContainer from './components/storeContainer';
+import StoreContainer from './components/StoreContainer';
 
 
 function App() {
@@ -11,6 +11,5 @@ function App() {
 
     )
 }
-
 
 export default App;

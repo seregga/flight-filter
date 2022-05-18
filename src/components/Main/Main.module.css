@@ -105,3 +105,12 @@
 .date {
     color: #004dc0;
 }
+
+.main__button {
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(112, 112, 112);
+    color: #fff;
+    border-radius: 3px;
+    font-weight: 600;
+}

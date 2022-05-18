@@ -4,18 +4,19 @@ import MOCK_FLIGHT from '../data/MOCK_FLIGHT.json';
 import Filters from './SideBar/Filters';
 import MainContainer from './Main/MainContainer';
 import Loader from './UI/Loader/Loader';
-import { filterByFlightCost } from './../common/common';
+import { filterByFlightCost } from '../common/common';
 
 const StoreContainer = () => {
-
+    console.log('working storeContainer');
     const [flightList, setFlightList] = useState(MOCK_FLIGHT)
     const [beginCostInput, setBeginCostInput] = useState('')
-    const [endCostInput, setEndCostInput] = useState(230000)
+    const [endCostInput, setEndCostInput] = useState(50000)
     const [isLoading, setIsLoading] = useState(false)
     const [sortValueInput, setSortValueInput] = useState('1')
-    const [transferValueInput, setTransferValueInput] = useState('2')
+    const [transferValueInput, setTransferValueInput] = useState('1')
 
     const filteredByCostAndTransfer = () => {
+        console.log('working filteredByCostAndTransfer');
         const filteredByFlightCost = MOCK_FLIGHT.result.flights
             .filter(el => filterByFlightCost(MOCK_FLIGHT, beginCostInput, endCostInput)
                 .includes(Number(el.flight.price.total.amount)))
